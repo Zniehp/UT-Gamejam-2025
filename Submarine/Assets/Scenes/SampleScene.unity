@@ -257,6 +257,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 269465402}
   m_CullTransparentMesh: 1
+--- !u!1 &410374568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 410374569}
+  m_Layer: 0
+  m_Name: CenterPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &410374569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410374568}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &522299249
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +462,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2013825124}
+        m_TargetAssemblyTypeName: BackgroundMoveScript, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &605103757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,7 +555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 920637857}
   - component: {fileID: 920637859}
-  - component: {fileID: 920637858}
+  - component: {fileID: 920637860}
   m_Layer: 0
   m_Name: MonsterGraphics
   m_TagString: Untagged
@@ -529,34 +572,12 @@ Transform:
   m_GameObject: {fileID: 920637856}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 3.79, y: 0, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 611641851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
---- !u!95 &920637858
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 920637856}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 80a1c0e86338a59448a26de802d0a6cd, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &920637859
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -612,6 +633,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &920637860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920637856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da798aa94dc1eb4886dc96164e09ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterManagerScript: {fileID: 2013825126}
+  centerPoint: {fileID: 410374569}
+  targetPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1225104800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,8 +1157,8 @@ MonoBehaviour:
   maxSpeed: 1
   slowDownSpeed: 0.1
   speedChangeSpeed: 1
-  currentSpeed: 0
-  monsterManager: {fileID: 0}
+  currentSpeed: 0.1
+  monsterManager: {fileID: 2013825124}
 --- !u!1 &2013825124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,11 +1204,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterAngerLevel: 0
-  startingMonsterAnger: 0
-  startingHuntTime: 0
-  centerPoint: {fileID: 0}
-  monsterGraphics: {fileID: 0}
-  monsterAnimator: {fileID: 0}
+  startingMonsterAnger: 100
+  startingHuntTime: 20
+  monsterDistance: 8
+  onDiedToMonster:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2013825126}
+        m_TargetAssemblyTypeName: UnityEngine.MonoBehaviour, UnityEngine
+        m_MethodName: StopAllCoroutines
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2110566596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,3 +1368,4 @@ SceneRoots:
   - {fileID: 1935922005}
   - {fileID: 522299252}
   - {fileID: 611641851}
+  - {fileID: 410374569}

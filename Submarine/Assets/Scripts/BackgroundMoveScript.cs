@@ -31,7 +31,6 @@ public class BackgroundMoveScript : MonoBehaviour
         while (currentSpeed < maxSpeed)
         {
             currentSpeed += speedChangeSpeed * Time.deltaTime;
-            monsterManagerScript.ChangeMonsterAnger(Time.deltaTime);
             yield return null;
         }
         currentSpeed = maxSpeed;
@@ -43,7 +42,6 @@ public class BackgroundMoveScript : MonoBehaviour
         while (currentSpeed > slowDownSpeed)
         {
             currentSpeed -= speedChangeSpeed * Time.deltaTime;
-            monsterManagerScript.ChangeMonsterAnger(-Time.deltaTime);
             yield return null;
         }
         currentSpeed = slowDownSpeed;
@@ -53,12 +51,19 @@ public class BackgroundMoveScript : MonoBehaviour
     private void Move()
     {
         transform.position = new Vector2(transform.position.x, transform.position.y + currentSpeed * Time.deltaTime);
+        if (currentSpeed >= 2 * slowDownSpeed || currentSpeed !<= 0)
+        {
+            monsterManagerScript.ChangeMonsterAnger(Time.deltaTime);
+        }
+        else
+        {
+            monsterManagerScript.ChangeMonsterAnger(-Time.deltaTime);
+        }
     }
-
-    public void StartMovingRoutine()
-    {
-        StartCoroutine(StartMoving());
-    }
+            public void StartMovingRoutine()
+            {
+                StartCoroutine(StartMoving());
+            }
 
     public void StartStopRoutine()
     {
