@@ -13,10 +13,13 @@ public class BackgroundMoveScript : MonoBehaviour
     
     private Rigidbody2D rigidbody2d;
     public float currentSpeed;
+    public GameObject monsterManager;
+    private MonsterManagerScript monsterManagerScript;
 
     private void Awake()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
+        monsterManagerScript = monsterManager.GetComponent<MonsterManagerScript>();
     }
     private void Update()
     {
@@ -28,6 +31,7 @@ public class BackgroundMoveScript : MonoBehaviour
         while (currentSpeed < maxSpeed)
         {
             currentSpeed += speedChangeSpeed * Time.deltaTime;
+            monsterManagerScript.ChangeMonsterAnger(Time.deltaTime);
             yield return null;
         }
         currentSpeed = maxSpeed;
@@ -39,6 +43,7 @@ public class BackgroundMoveScript : MonoBehaviour
         while (currentSpeed > slowDownSpeed)
         {
             currentSpeed -= speedChangeSpeed * Time.deltaTime;
+            monsterManagerScript.ChangeMonsterAnger(-Time.deltaTime);
             yield return null;
         }
         currentSpeed = slowDownSpeed;
