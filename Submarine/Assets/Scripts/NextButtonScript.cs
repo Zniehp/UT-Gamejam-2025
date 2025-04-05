@@ -13,10 +13,9 @@ public class NextButtonScript : MonoBehaviour
     public BackgroundCheckpoints backgroundCheckpoints;
     public TextDisplay textManager;
     private int currentTextIndex;
-    private bool buttonPressed;
+    public bool buttonPressed;
 
     public UnityEvent OnTextEnd;
-
     public void CheckStoryState()
     {
         if(backgroundCheckpoints.day3Passed)
@@ -43,69 +42,68 @@ public class NextButtonScript : MonoBehaviour
     }
     private IEnumerator StartDay1EndSequence()
     {
-        if (currentTextIndex <= Day1Night.Length)
+        while (currentTextIndex < Day1Night.Length)
         {
             textManager.currentText = Day1Night[currentTextIndex];
             textManager.UpdateText();
             currentTextIndex += 1;
 
-            while (buttonPressed == false)
+            while (buttonPressed != true)
+            {
+                yield return null;
+            }
+
+            buttonPressed = false;
+            yield return null;
+        }
+      
+        while (currentTextIndex < Day2morning.Length + Day1Night.Length)
+        {
+            textManager.currentText = Day2morning[currentTextIndex - Day1Night.Length];
+            textManager.UpdateText();
+            currentTextIndex += 1;
+            Debug.Log("tegin veelkord 'ra");
+
+            while (buttonPressed != true)
             {
                 yield return null;
             }
 
             buttonPressed = false;
         }
-        else if (currentTextIndex <= Day2morning.Length + Day1Night.Length)
-        {
-            textManager.currentText = Day2morning[currentTextIndex - Day1Night.Length];
-            textManager.UpdateText();
-            currentTextIndex += 1;
-
-            while (buttonPressed == false)
-            {
-                yield return null;
-            }
-
-            buttonPressed = true;
-            yield return null;
-        }
-        else
-        {
             OnTextEnd.Invoke();
             yield break;
-        }
     }
 
     private IEnumerator StartDay2EndSequence()
     {
-        while (currentTextIndex <= Day1Night.Length)
+        while (currentTextIndex < Day1Night.Length)
         {
             textManager.currentText = Day2Night[currentTextIndex];
             textManager.UpdateText();
             currentTextIndex += 1;
 
-            while (buttonPressed == false)
+            while (buttonPressed != true)
             {
                 yield return null;
             }
 
-            buttonPressed = true;
+            buttonPressed = false;
             yield return null;
         }
 
-        while (currentTextIndex <= Day3morning.Length + Day2Night.Length)
+        while (currentTextIndex < Day3morning.Length + Day2Night.Length)
         {
             textManager.currentText = Day2morning[currentTextIndex - Day1Night.Length];
             textManager.UpdateText();
             currentTextIndex += 1;
 
-            while (buttonPressed == false)
+            while (buttonPressed != true)
             {
                 yield return null;
             }
 
-            buttonPressed = true;
+            buttonPressed = false;
             yield return null;
         }
         OnTextEnd.Invoke();
@@ -115,18 +113,18 @@ public class NextButtonScript : MonoBehaviour
 
     private IEnumerator StartDay3EndSequence()
     {
-        while (currentTextIndex <= Day3Night.Length)
+        while (currentTextIndex < Day3Night.Length)
         {
             textManager.currentText = Day1Night[currentTextIndex];
             textManager.UpdateText();
             currentTextIndex += 1;
 
-            while (buttonPressed == false)
+            while (buttonPressed != true)
             {
                 yield return null;
             }
 
-            buttonPressed = true;
+            buttonPressed = false;
             yield return null;
         }
 
@@ -136,18 +134,18 @@ public class NextButtonScript : MonoBehaviour
 
     private IEnumerator StartDay1StartSequence()
     {
-        while (currentTextIndex <= Day1morning.Length)
+        while (currentTextIndex < Day1morning.Length)
         {
             textManager.currentText = Day1morning[currentTextIndex];
             textManager.UpdateText();
             currentTextIndex += 1;
 
-            while (buttonPressed == false)
+            while (buttonPressed != true)
             {
                 yield return null;
             }
 
-            buttonPressed = true;
+            buttonPressed = false;
             yield return null;
         }
 

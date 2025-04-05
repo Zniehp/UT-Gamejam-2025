@@ -18,17 +18,17 @@ public class BackgroundCheckpoints : MonoBehaviour
 
     private void Update()
     {
-     if (transform.position.y >= day1EndDistance)
+        if (transform.position.y >= day1EndDistance && day1Passed != true)
         {
             day1Passed = true;
             day1Event.Invoke();
         }
-     else if (transform.position.y >= day2EndDistance)
+     else if (transform.position.y >= day2EndDistance && day2Passed != true)
         {
             day2Passed = true;
             day2Event.Invoke();
         }
-     else if (transform.position.y >= day3EndDistance)
+     else if (transform.position.y >= day3EndDistance && day3Passed != true)
         {
             day3Passed = true;
             day3Event.Invoke();
