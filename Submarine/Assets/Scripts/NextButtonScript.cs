@@ -15,7 +15,17 @@ public class NextButtonScript : MonoBehaviour
     private int currentTextIndex;
     public bool buttonPressed;
 
+    public GameObject musicManager;
+    private AudioManager audioManager;
+    private AudioSource musicSource;
+
     public UnityEvent OnTextEnd;
+
+    private void Awake()
+    {
+        audioManager = musicManager.GetComponent<AudioManager>();
+        musicSource = musicManager.AddComponent<AudioSource>();
+    }
     public void CheckStoryState()
     {
         if(backgroundCheckpoints.day3Passed)
@@ -56,7 +66,8 @@ public class NextButtonScript : MonoBehaviour
             buttonPressed = false;
             yield return null;
         }
-      
+
+        audioManager.StartDay2music();
         while (currentTextIndex < Day2morning.Length + Day1Night.Length)
         {
             textManager.currentText = Day2morning[currentTextIndex - Day1Night.Length];
@@ -91,6 +102,7 @@ public class NextButtonScript : MonoBehaviour
             buttonPressed = false;
             yield return null;
         }
+
 
         while (currentTextIndex < Day3morning.Length + Day2Night.Length)
         {

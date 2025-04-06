@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,13 +12,17 @@ public class TentacleMovement : MonoBehaviour
     private Transform centerPoint;
     public Vector3 targetPosition;
     private float monsterDistance;
+    private float distanceToCenter;
+    private float speedToCenter;
 
-    private float tentacleSpeed = 0.3f;
+    private float tentacleSpeed = 0.5f;
     private bool isActive;
 
     private void Awake()
     {
         startingPos = this.transform.position;
+        distanceToCenter = Vector3.Distance(transform.position, centerPoint.position);
+        speedToCenter = distanceToCenter / 8 * tentacleSpeed;
     }
 
     private void Start()
@@ -37,8 +42,10 @@ public class TentacleMovement : MonoBehaviour
             //creates a point for the tentacle to move to based on monsterdistance
             targetPosition = new Vector3(startingPos.x / 8 * monsterDistance + centerPoint.position.x,
                 startingPos.y / 8 * monsterDistance + centerPoint.position.y, startingPos.z);
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, tentacleSpeed * Time.deltaTime);
-            yield return null;
+
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, speedToCenter * Time.deltaTime);
+
+                yield return null;
         }
         yield break;
     }
