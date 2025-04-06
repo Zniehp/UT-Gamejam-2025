@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 30fd40c8162811d4187b8b6af5e35dfe
+guid: 2f080f1e4c74bb04fb5db40b35053f8e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1859517901394617139
-    second: 2 base backround tile_0
+      213: -5402786409628684520
+    second: 3 coral backround tile_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 2 base backround tile_0
+      name: 3 coral backround tile_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dccd4e1225aa136e0800000000000000
-      internalID: -1859517901394617139
+      spriteID: 81f26c8b2627505b0800000000000000
+      internalID: -5402786409628684520
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      2 base backround tile_0: -1859517901394617139
+      3 coral backround tile_0: -5402786409628684520
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
