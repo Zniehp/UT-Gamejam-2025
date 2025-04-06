@@ -11,15 +11,19 @@ public class MonsterManagerScript : MonoBehaviour
     [SerializeField]
     private float startingHuntTime;
 
-    private float remainingHuntTime;
+    public float remainingHuntTime;
     private bool isHunting;
     public float monsterDistance;
 
     public UnityEvent onDiedToMonster;
+    public AudioClip monster1;
+    public AudioClip monster2;
+    public AudioSource musicSource;
     
 
     private void Awake()
     {
+        musicSource = FindAnyObjectByType<AudioSource>();
         remainingHuntTime = startingHuntTime;
         monsterAngerLevel = startingMonsterAnger;
     }
@@ -82,6 +86,11 @@ public class MonsterManagerScript : MonoBehaviour
         else if (remainingHuntTime >= startingHuntTime / 8 * 4)
         {
             monsterDistance = 5;
+            if (musicSource.clip != monster1)
+            {
+                musicSource.clip = monster1;
+                musicSource.Play();
+            }
         }
         else if (remainingHuntTime >= startingHuntTime / 8 * 3)
         {
@@ -94,6 +103,11 @@ public class MonsterManagerScript : MonoBehaviour
         else if (remainingHuntTime >= startingHuntTime / 8)
         {
             monsterDistance = 2;
+            if (musicSource.clip != monster2)
+            {
+                musicSource.clip = monster2;
+                musicSource.Play();
+            }
         }
         else if (remainingHuntTime < startingHuntTime / 8 && remainingHuntTime > 0f)
         {

@@ -18,7 +18,7 @@ public class NextButtonScript : MonoBehaviour
     public GameObject musicManager;
     private AudioManager audioManager;
     private AudioSource musicSource;
-
+    public DayNightTransition daynight;
     public UnityEvent OnTextEnd;
 
     private void Awake()
@@ -50,6 +50,26 @@ public class NextButtonScript : MonoBehaviour
         }
 
     }
+
+    private IEnumerator StartDay1StartSequence()
+    {
+        while (currentTextIndex < Day1morning.Length)
+        {
+            textManager.currentText = Day1morning[currentTextIndex];
+            textManager.UpdateText();
+            currentTextIndex += 1;
+
+            while (buttonPressed != true)
+            {
+                yield return null;
+            }
+
+            buttonPressed = false;
+            yield return null;
+        }
+        OnTextEnd.Invoke();
+        yield break;
+    }
     private IEnumerator StartDay1EndSequence()
     {
         while (currentTextIndex < Day1Night.Length)
@@ -66,7 +86,6 @@ public class NextButtonScript : MonoBehaviour
             buttonPressed = false;
             yield return null;
         }
-
         audioManager.StartDay2music();
         while (currentTextIndex < Day2morning.Length + Day1Night.Length)
         {
@@ -82,7 +101,7 @@ public class NextButtonScript : MonoBehaviour
 
             buttonPressed = false;
         }
-            OnTextEnd.Invoke();
+        OnTextEnd.Invoke();
             yield break;
     }
 
@@ -102,7 +121,6 @@ public class NextButtonScript : MonoBehaviour
             buttonPressed = false;
             yield return null;
         }
-
 
         while (currentTextIndex < Day3morning.Length + Day2Night.Length)
         {
@@ -139,28 +157,6 @@ public class NextButtonScript : MonoBehaviour
             buttonPressed = false;
             yield return null;
         }
-
-        OnTextEnd.Invoke();
-        yield break;
-    }
-
-    private IEnumerator StartDay1StartSequence()
-    {
-        while (currentTextIndex < Day1morning.Length)
-        {
-            textManager.currentText = Day1morning[currentTextIndex];
-            textManager.UpdateText();
-            currentTextIndex += 1;
-
-            while (buttonPressed != true)
-            {
-                yield return null;
-            }
-
-            buttonPressed = false;
-            yield return null;
-        }
-
         OnTextEnd.Invoke();
         yield break;
     }

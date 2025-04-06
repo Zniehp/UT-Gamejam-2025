@@ -15,7 +15,7 @@ public class TentacleMovement : MonoBehaviour
     private float distanceToCenter;
     private float speedToCenter;
 
-    private float tentacleSpeed = 0.5f;
+    private float tentacleSpeed = 0.8f;
     private bool isActive;
 
     private void Awake()
