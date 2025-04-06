@@ -8,7 +8,7 @@ public class DayNightTransition : MonoBehaviour
 {
     private Image image;
     private bool IntoDark;
-    private Color alphaColor;
+    private float alpha;
     private bool transitionDone;
     private bool canFade;
     private float fadetime;
@@ -23,15 +23,14 @@ public class DayNightTransition : MonoBehaviour
     public void Start()
     {
         canFade = false;
-        alphaColor = image.color;
-        alphaColor.a = 0;
         fadetime = 0;
     }
     public void Update()
     {
         if (canFade)
         {
-            image.color = Color.Lerp(image.color, alphaColor, 2 * Time.deltaTime);
+            Color newcolor = new (image.color.r, image.color.g, image.color.b, image.color.a + (1f * Time.deltaTime));
+            image.color = newcolor;
             fadetime += Time.deltaTime;
             if (fadetime > 2)
             {
